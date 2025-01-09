@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/task"
+        android:title="任务"
+        android:icon="@drawable/task"/>
+
+    <item
+        android:id="@+id/workbench"
+        android:title="工作台"
+        android:icon="@drawable/workbench"/>
+
+    <item
+        android:id="@+id/mine"
+        android:title="我"
+        android:icon="@drawable/mine"/>
+
+</menu>
