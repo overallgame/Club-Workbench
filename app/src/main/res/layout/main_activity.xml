@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/mainPager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -14,12 +14,11 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:itemBackground="@android:color/transparent"
+        app:elevation="0dp"
+        app:itemBackground="@drawable/bottom_nav_item_background"
         app:itemIconTint="@color/bottom_nav_color"
-        app:itemPaddingBottom="0dp"
-        app:itemPaddingTop="0dp"
         app:itemSpacing="0dp"
         app:itemTextColor="@color/bottom_nav_color"
         app:menu="@menu/bottom_navigation" />

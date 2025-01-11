@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="#009AEA" android:state_checked="true"/> <!-- 选中状态 -->
-    <item android:color="#e6e6e6" /> <!-- 默认状态 -->
+    <item android:color="#e9e9e9" /> <!-- 默认状态 -->
 </selector>

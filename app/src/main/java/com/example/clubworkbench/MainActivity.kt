@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.example.clubworkbench.Account.Account
+import com.example.clubworkbench.Task.Task
+import com.example.clubworkbench.Workbench.Workbench
 import com.example.clubworkbench.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,22 +24,22 @@ class MainActivity : AppCompatActivity() {
         binding.mainBottomNavigation.setOnItemSelectedListener { item ->
             val view = binding.mainBottomNavigation.findViewById<View>(item.itemId)
             if (view != null) {
-                val animation = AnimationUtils.loadAnimation(this,R.animator.icon_click_animation)
+                val animation = AnimationUtils.loadAnimation(this, R.animator.icon_click_animation)
                 view.startAnimation(animation)
             }
             when (item.itemId) {
                 R.id.task -> {
-                    binding.mainPager.currentItem = 0
+                    binding.viewPager.currentItem = 0
                     true
                 }
 
                 R.id.workbench -> {
-                    binding.mainPager.currentItem = 1
+                    binding.viewPager.currentItem = 1
                     true
                 }
 
                 R.id.mine -> {
-                    binding.mainPager.currentItem = 2
+                    binding.viewPager.currentItem = 2
                     true
                 }
 
@@ -45,12 +47,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val fragments: List<Fragment> = listOf()
+        val fragments: List<Fragment> = listOf(Task(),Workbench(),Account())
         val viewPagerAdapter = ViewPagerAdapter(lifecycle, supportFragmentManager, fragments)
-        binding.mainPager.adapter = viewPagerAdapter
-        binding.mainPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPager.adapter = viewPagerAdapter
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                binding.mainBottomNavigation.menu.findItem(when (position) {
+                    0 -> R.id.task
+                    1 -> R.id.workbench
+                    2 -> R.id.mine
+                    else -> throw IllegalStateException("Unknown position: $position")
+                }).isChecked = true
             }
         })
     }
