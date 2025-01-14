@@ -1,9 +1,10 @@
 package com.example.clubworkbench
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.os.Bundle
-import android.view.View
-import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -22,10 +23,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.mainBottomNavigation.setOnItemSelectedListener { item ->
-            val view = binding.mainBottomNavigation.findViewById<View>(item.itemId)
-            if (view != null) {
-                val animation = AnimationUtils.loadAnimation(this, R.animator.icon_click_animation)
-                view.startAnimation(animation)
+//            val view = binding.mainBottomNavigation.findViewById<View>(item.itemId)
+//            if (view != null) {
+//                val animation = AnimationUtils.loadAnimation(this, R.animator.icon_click_animation)
+//                view.startAnimation(animation)
+//            }
+            val icon = item.actionView?.findViewById<ImageView>(R.id.icon)
+            val title = item.actionView?.findViewById<TextView>(R.id.title)
+
+            if (item.isChecked) {
+                if (icon != null) {
+                    icon.layoutParams.height = 24.dpToPx()
+                    icon.layoutParams.width = 24.dpToPx()
+                    icon.setPadding(0, 6.dpToPx(), 0, 0)
+                }
+                if (title != null) {
+                    title.textSize = 14f
+                }
+            } else {
+                if (icon != null) {
+                    icon.layoutParams.height = 24.dpToPx()
+                    icon.layoutParams.width = 24.dpToPx()
+                    icon.setPadding(0, 8.dpToPx(), 0, 0)
+                }
+                if (title != null) {
+                    title.textSize = 12f
+                }
             }
             when (item.itemId) {
                 R.id.task -> {
@@ -47,19 +70,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val fragments: List<Fragment> = listOf(Task(),Workbench(),Account())
+        val fragments: List<Fragment> = listOf(Task(), Workbench(), Account())
         val viewPagerAdapter = ViewPagerAdapter(lifecycle, supportFragmentManager, fragments)
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                binding.mainBottomNavigation.menu.findItem(when (position) {
-                    0 -> R.id.task
-                    1 -> R.id.workbench
-                    2 -> R.id.mine
-                    else -> throw IllegalStateException("Unknown position: $position")
-                }).isChecked = true
+                binding.mainBottomNavigation.menu.findItem(
+                    when (position) {
+                        0 -> R.id.task
+                        1 -> R.id.workbench
+                        2 -> R.id.mine
+                        else -> throw IllegalStateException("Unknown position: $position")
+                    }
+                ).isChecked = true
             }
         })
+    }
+
+    private fun Int.dpToPx(): Int {
+        return (this * Resources.getSystem().displayMetrics.density).toInt()
     }
 }

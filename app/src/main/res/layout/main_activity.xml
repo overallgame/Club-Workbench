@@ -19,8 +19,8 @@
         app:elevation="0dp"
         app:itemBackground="@drawable/bottom_nav_item_background"
         app:itemIconTint="@color/bottom_nav_color"
-        app:itemSpacing="0dp"
         app:itemTextColor="@color/bottom_nav_color"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation" />
 
 </LinearLayout>
