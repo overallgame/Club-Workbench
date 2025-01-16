@@ -5,19 +5,16 @@
     <item
         android:id="@+id/task"
         android:title="任务"
-        android:icon="@drawable/task"
-        app:actionLayout="@layout/menu_item_layout"/>
+        android:icon="@drawable/task" />
 
     <item
         android:id="@+id/workbench"
         android:title="工作台"
-        android:icon="@drawable/workbench"
-        app:actionLayout="@layout/menu_item_layout"/>
+        android:icon="@drawable/workbench" />
 
     <item
         android:id="@+id/mine"
         android:title="我"
-        android:icon="@drawable/mine"
-        app:actionLayout="@layout/menu_item_layout"/>
+        android:icon="@drawable/mine" />
 
 </menu>
